@@ -5,6 +5,7 @@
 
 const double Q=0.292; //GeV2
 const double alpha = 1.0/137;
+const double hbarc = 1.97327; // 10^(-14)GeV cm
 
 double scattered_electron_energy (double E1, int theta);
 double diferential_cross_section_Mott (double E1, double E3, int theta);
@@ -42,5 +43,9 @@ double diferential_cross_section_Mott (double E1, double E3, int angle)
   
   Mott = ((alpha*alpha)/(4*E1*E1*pow(sin(theta/2.0), 4)))*(E3/E1)*cos(theta/2.0)*cos(theta/2.0);
 
+  //Calculating the Mott differential cross section from natural units to SI:
+
+  Mott = (Mott/4*M_PI)*hbarc*hbarc*pow(10, -28);  //Mott en cm2/steradian
+  
   return Mott;
 }
