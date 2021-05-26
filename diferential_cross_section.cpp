@@ -12,6 +12,7 @@ const int N_data = 5;
 double scattered_electron_energy (double E1, int theta);
 double diferential_cross_section_Mott (double E1, double E3, int theta);
 void initial_values (std::vector<int>& angles, std::vector<double> & energies1, std::vector<double> & energies3, std::vector<double> & expdifcrosection);
+void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection);
 
 int main ()
 {
@@ -23,13 +24,9 @@ int main ()
   std::vector<double>energies3(N_data, 0.0);
   std::vector<double>expdifcrosection(N_data, 0.0);
   
-  double E1 = 0.5; //GeV
-  double E3 = 0.0; //GeV
+  initial_values (angles, energies1, energies3, expdifcrosection);
 
-  int theta = 90;
-  E3 = scattered_electron_energy (E1, theta);
-    
-  std::cout<<E3<<"\t"<<diferential_cross_section_Mott(E1, E3, theta)<<"\t"<<energies1[2]<<"\t"<<angles[2]<<"\t"<<std::endl;
+  print (angles, energies1, energies3, expdifcrosection);
   
   return 0;
 }
@@ -69,25 +66,33 @@ void initial_values (std::vector<int>& angles, std::vector<double> & energies1, 
 
   //energies of incident electron
 
-  energies1[0] = 0.0;
-  energies1[1] = 0.0;
-  energies1[2] = 0.0;
-  energies1[3] = 0.0;
-  energies1[4] = 0.0;
+  energies1[0] = 0.1;
+  energies1[1] = 0.2;
+  energies1[2] = 0.3;
+  energies1[3] = 0.4;
+  energies1[4] = 0.5;
 
   //energies of scattered electron
 
-  energies3[0] = 0.0;
-  energies3[1] = 0.0;
-  energies3[2] = 0.0;
-  energies3[3] = 0.0;
-  energies3[4] = 0.0;
+  energies3[0] = scattered_electron_energy (energies1[0], angles[0]);
+  energies3[1] = scattered_electron_energy (energies1[1], angles[1]);
+  energies3[2] = scattered_electron_energy (energies1[2], angles[2]);
+  energies3[3] = scattered_electron_energy (energies1[3], angles[3]);
+  energies3[4] = scattered_electron_energy (energies1[4], angles[4]);
 
   //experimental differential cross section
 
-  expdifcrosection[0] = 0.0;
-  expdifcrosection[0] = 0.0;
-  expdifcrosection[0] = 0.0;
-  expdifcrosection[0] = 0.0;
-  expdifcrosection[0] = 0.0;
+  expdifcrosection[0] = 0.5;
+  expdifcrosection[1] = 1.0;
+  expdifcrosection[2] = 1.5;
+  expdifcrosection[3] = 2.0;
+  expdifcrosection[4] = 2.5;
+}
+
+void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection)
+{
+  for (int ii=0; ii<N_data; ii++)
+    {
+      std::cout<<angles[ii]<<"\t"<<energies1[ii]<<"\t"<<energies3[ii]<<"\t"<<expdifcrosection[ii]<<std::endl;
+    }
 }
