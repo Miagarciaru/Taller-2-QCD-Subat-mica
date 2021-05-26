@@ -51,7 +51,7 @@ double diferential_cross_section_Mott (double E1, double E3, int angle)
 
   //Calculating the Mott differential cross section from natural units to SI:
 
-  Mott = (Mott/4*M_PI)*hbarc*hbarc*pow(10, -28)/10;  //Mott en cm2/steradian with correction of the pow function on 10
+  Mott = (Mott/4*M_PI)*hbarc*hbarc*pow(10, -28);  //Mott en cm2/steradian
   
   return Mott;
 }
@@ -65,13 +65,13 @@ void initial_values (std::vector<int>& angles, std::vector<double> & energies1, 
   angles[3] = 120;
   angles[4] = 135;
 
-  //energies of incident electron
+  //energies of incident electron GeV
 
-  energies1[0] = 0.1;
-  energies1[1] = 0.2;
-  energies1[2] = 0.3;
-  energies1[3] = 0.4;
-  energies1[4] = 0.5;
+  energies1[0] = 0.627;
+  energies1[1] = 0.527;
+  energies1[2] = 0.466;
+  energies1[3] = 0.400;
+  energies1[4] = 0.380;
 
   //energies of scattered electron
 
@@ -81,13 +81,13 @@ void initial_values (std::vector<int>& angles, std::vector<double> & energies1, 
   energies3[3] = scattered_electron_energy (energies1[3], angles[3]);
   energies3[4] = scattered_electron_energy (energies1[4], angles[4]);
 
-  //experimental differential cross section
+  //experimental differential cross section cm^2/steradian
 
-  expdifcrosection[0] = 0.5;
-  expdifcrosection[1] = 1.0;
-  expdifcrosection[2] = 1.5;
-  expdifcrosection[3] = 2.0;
-  expdifcrosection[4] = 2.5;
+  expdifcrosection[0] = 5*pow(10, -32);
+  expdifcrosection[1] = 3*pow(10, -32);
+  expdifcrosection[2] = 2*pow(10, -32);
+  expdifcrosection[3] = 1*pow(10, -32);
+  expdifcrosection[4] = 9*pow(10, -33);
 
   //Mott differential cross section
 
@@ -100,13 +100,15 @@ void initial_values (std::vector<int>& angles, std::vector<double> & energies1, 
 
 void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection, std::vector<double> Mottdifcrosection)
 {
+  /*
   for (int ii=0; ii<N_data; ii++)
     {
       std::cout<<angles[ii]<<"\t"<<energies1[ii]<<"\t"<<energies3[ii]<<"\t"<<expdifcrosection[ii]<<"\t"<<Mottdifcrosection[ii]<<std::endl;
     }
-
+  */
+  
   for (int jj=0; jj<N_data; jj++)
     {
-      std::cout<<expdifcrosection[jj]/Mottdifcrosection[jj]<<"\t"<<pow(tan(angles[jj]*M_PI/360), 2)<<std::endl;
+      std::cout<<pow(tan(angles[jj]*M_PI/360), 2)<<"\t"<<expdifcrosection[jj]/Mottdifcrosection[jj]<<std::endl;
     }
 }
