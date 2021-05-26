@@ -11,8 +11,8 @@ const int N_data = 5;
 
 double scattered_electron_energy (double E1, int theta);
 double diferential_cross_section_Mott (double E1, double E3, int theta);
-void initial_values (std::vector<int>& angles, std::vector<double> & energies1, std::vector<double> & energies3, std::vector<double> & expdifcrosection);
-void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection);
+void initial_values (std::vector<int>& angles, std::vector<double> & energies1, std::vector<double> & energies3, std::vector<double> & expdifcrosection, std::vector<double> & Mottdifcrosection);
+void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection, std::vector<double> Mottdifcrosection);
 
 int main ()
 {
@@ -23,11 +23,12 @@ int main ()
   std::vector<double>energies1(N_data, 0.0);
   std::vector<double>energies3(N_data, 0.0);
   std::vector<double>expdifcrosection(N_data, 0.0);
+  std::vector<double>Mottdifcrosection(N_data, 0.0);
   
-  initial_values (angles, energies1, energies3, expdifcrosection);
+  initial_values (angles, energies1, energies3, expdifcrosection, Mottdifcrosection);
 
-  print (angles, energies1, energies3, expdifcrosection);
-  
+  print (angles, energies1, energies3, expdifcrosection, Mottdifcrosection);
+
   return 0;
 }
 
@@ -55,7 +56,7 @@ double diferential_cross_section_Mott (double E1, double E3, int angle)
   return Mott;
 }
 
-void initial_values (std::vector<int>& angles, std::vector<double> & energies1, std::vector<double> & energies3, std::vector<double> & expdifcrosection)
+void initial_values (std::vector<int>& angles, std::vector<double> & energies1, std::vector<double> & energies3, std::vector<double> & expdifcrosection, std::vector<double> & Mottdifcrosection)
 {
   //angles values
   angles[0] = 60;
@@ -87,12 +88,25 @@ void initial_values (std::vector<int>& angles, std::vector<double> & energies1, 
   expdifcrosection[2] = 1.5;
   expdifcrosection[3] = 2.0;
   expdifcrosection[4] = 2.5;
+
+  //Mott differential cross section
+
+  Mottdifcrosection[0] = diferential_cross_section_Mott (energies1[0], energies3[0], angles[0]);
+  Mottdifcrosection[1] = diferential_cross_section_Mott (energies1[1], energies3[1], angles[1]);
+  Mottdifcrosection[2] = diferential_cross_section_Mott (energies1[2], energies3[2], angles[2]);
+  Mottdifcrosection[3] = diferential_cross_section_Mott (energies1[3], energies3[3], angles[3]);
+  Mottdifcrosection[4] = diferential_cross_section_Mott (energies1[4], energies3[4], angles[4]);  
 }
 
-void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection)
+void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection, std::vector<double> Mottdifcrosection)
 {
   for (int ii=0; ii<N_data; ii++)
     {
-      std::cout<<angles[ii]<<"\t"<<energies1[ii]<<"\t"<<energies3[ii]<<"\t"<<expdifcrosection[ii]<<std::endl;
+      std::cout<<angles[ii]<<"\t"<<energies1[ii]<<"\t"<<energies3[ii]<<"\t"<<expdifcrosection[ii]<<"\t"<<Mottdifcrosection[ii]<<std::endl;
+    }
+
+  for (int jj=0; jj<N_data; jj++)
+    {
+      std::cout<<expdifcrosection[jj]/Mottdifcrosection[jj]<<"\t"<<pow(tan(angles[jj]*M_PI/360), 2)<<std::endl;
     }
 }
