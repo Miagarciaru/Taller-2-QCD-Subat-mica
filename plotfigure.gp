@@ -15,5 +15,5 @@ set border lw 2
 #c=2.99792458 #velocidad de la luz en unidades cgs
 #f(x)=(2*h*(c**2))/((x**5)*(exp((h*c)/(x*K*T))-1))
 f(x)=m*x+b
-fit f(x) "datos.txt" using 1:2 via m,b
-plot "datos.txt" using 1:2 title "Experimental data" lt 7 lc 7 w p, f(x) title "Fitted Curve" 
+fit f(x) "data.txt" using 1:2 via m,b
+plot "data.txt" using 1:2 title "Experimental data" lt 7 lc 7 w p, f(x) title "Fitted Curve" 

@@ -10,4 +10,4 @@ plot: plotfigure.gp
 	gnuplot $^
 
 clean:
-	-rm -f *~ *# *o *out *x QCD_curve.png
+	-rm -f *~ *# *o *out *x QCD_curve.png *txt *log

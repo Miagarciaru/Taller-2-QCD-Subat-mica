@@ -4,10 +4,11 @@
 #include <vector>
 #define _USE_MATH_DEFINES
 
-const double Q=0.292; //GeV2
-const double alpha = 1.0/137;
+const double Q=sqrt(0.292); //GeV
+const double alpha = 1.0/137; //constant fine structure
 const double hbarc = 1.97327; // 10^(-14)GeV cm
 const int N_data = 5;
+const double mp = 0.9383; //mass of proton GeV
 
 double scattered_electron_energy (double E1, int theta);
 double diferential_cross_section_Mott (double E1, double E3, int theta);
@@ -37,7 +38,9 @@ double scattered_electron_energy (double E1, int angle)
   double energy = 0.0;
   double theta = angle*M_PI/180;
 
-  energy = (Q*Q)/(4*E1*sin(theta/2.0)*sin(theta/2.0));
+  energy = (E1*mp)/(mp+2*E1*sin(theta/2.0)*sin(theta/2.0));
+  
+  // energy = (Q*Q)/(4*E1*sin(theta/2.0)*sin(theta/2.0));
 
   return energy;
 }
@@ -51,7 +54,7 @@ double diferential_cross_section_Mott (double E1, double E3, int angle)
 
   //Calculating the Mott differential cross section from natural units to SI:
 
-  Mott = (Mott/4*M_PI)*hbarc*hbarc*pow(10, -28);  //Mott en cm2/steradian
+  Mott = Mott*hbarc*hbarc*pow(10, -28);  //Mott en cm2/steradian
   
   return Mott;
 }
