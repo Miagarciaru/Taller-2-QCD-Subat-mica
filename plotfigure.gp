@@ -15,4 +15,4 @@ set grid
 set border lw 2
 f(x)=m*x+b
 fit f(x) "data.txt" using 1:2 via m,b
-plot "data.txt" using 1:2 title "$Q^{2}=0.292$" lw 2 ps 2 lt 7 lc 7 w p, f(x) lw 3 title "Linear Regression"  
+plot "data.txt" using 1:2 title "$Q^{2}=0.292$ $GeV^2$" lw 2 ps 2 lt 7 lc 7 w p, f(x) lw 3 title "Linear Regression"  
