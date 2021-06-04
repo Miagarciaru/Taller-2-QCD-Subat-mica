@@ -4,7 +4,7 @@
 #include <vector>
 #define _USE_MATH_DEFINES
 
-const double Q=sqrt(0.292); //GeV
+const double Q=sqrt(0.5); //GeV
 const double alpha = 1.0/137; //constant fine structure
 const double hbarc = 1.97327; // 10^(-14)GeV cm
 const int N_data = 5;
@@ -62,6 +62,19 @@ double diferential_cross_section_Mott (double E1, double E3, int angle)
 void initial_values (std::vector<int>& angles, std::vector<double> & energies1, std::vector<double> & energies3, std::vector<double> & expdifcrosection, std::vector<double> & Mottdifcrosection)
 {
   //angles values
+  /* Q=0.292
+  angles[0] = 60;
+  angles[1] = 75;
+  angles[2] = 90;
+  angles[3] = 120;
+  angles[4] = 135;
+  */
+  /*Test 1 Cesar
+  angles[0] = 60;
+  angles[1] = 75;
+  angles[2] = 135;
+  */
+  //Test 2 Miguel
   angles[0] = 60;
   angles[1] = 75;
   angles[2] = 90;
@@ -69,36 +82,83 @@ void initial_values (std::vector<int>& angles, std::vector<double> & energies1, 
   angles[4] = 135;
 
   //energies of incident electron GeV
-
+  /*Q=0.292
   energies1[0] = 0.627;
   energies1[1] = 0.527;
   energies1[2] = 0.466;
   energies1[3] = 0.400;
   energies1[4] = 0.380;
-
+  */
+  /* Test 1 Cesar
+  energies1[0] = 0.740;
+  energies1[1] = 0.673;
+  energies1[2] = 0.520;
+  */
+  //Test 2 Miguel
+  energies1[0] = 0.747;
+  energies1[1] = 0.627;
+  energies1[2] = 0.560;
+  energies1[3] = 0.480;
+  energies1[4] = 0.453;
   //energies of scattered electron
-
+  /* Q=0.292
   energies3[0] = scattered_electron_energy (energies1[0], angles[0]);
   energies3[1] = scattered_electron_energy (energies1[1], angles[1]);
   energies3[2] = scattered_electron_energy (energies1[2], angles[2]);
   energies3[3] = scattered_electron_energy (energies1[3], angles[3]);
   energies3[4] = scattered_electron_energy (energies1[4], angles[4]);
-
+  */
+  /* Test 1 Cesar
+  energies3[0] = scattered_electron_energy (energies1[0], angles[0]);
+  energies3[1] = scattered_electron_energy (energies1[1], angles[1]);
+  energies3[2] = scattered_electron_energy (energies1[2], angles[2]);
+  */
+  //Test 2 Miguel
+  energies3[0] = scattered_electron_energy (energies1[0], angles[0]);
+  energies3[1] = scattered_electron_energy (energies1[1], angles[1]);
+  energies3[2] = scattered_electron_energy (energies1[2], angles[2]);
+  energies3[3] = scattered_electron_energy (energies1[3], angles[3]);
+  energies3[4] = scattered_electron_energy (energies1[4], angles[4]);
+  
   //experimental differential cross section cm^2/steradian
-
+  /* Q=0.292
   expdifcrosection[0] = 5*pow(10, -32);
   expdifcrosection[1] = 3*pow(10, -32);
   expdifcrosection[2] = 2*pow(10, -32);
   expdifcrosection[3] = 1*pow(10, -32);
   expdifcrosection[4] = 9*pow(10, -33);
-
+  */
+  /* Test 1 Cesar
+  expdifcrosection[0] = 3*pow(10, -32);
+  expdifcrosection[1] = 1.5*pow(10, -32);
+  expdifcrosection[2] = 2.5*pow(10, -33);
+  */
+  //Test 2 Miguel
+  expdifcrosection[0] = 3.25*pow(10, -32);
+  expdifcrosection[1] = 1.75*pow(10, -32);
+  expdifcrosection[2] = 1.25*pow(10, -32);
+  expdifcrosection[3] = 6.5*pow(10, -33);
+  expdifcrosection[4] = 5*pow(10, -33);
+  
   //Mott differential cross section
-
+  /* Q=0.292
   Mottdifcrosection[0] = diferential_cross_section_Mott (energies1[0], energies3[0], angles[0]);
   Mottdifcrosection[1] = diferential_cross_section_Mott (energies1[1], energies3[1], angles[1]);
   Mottdifcrosection[2] = diferential_cross_section_Mott (energies1[2], energies3[2], angles[2]);
   Mottdifcrosection[3] = diferential_cross_section_Mott (energies1[3], energies3[3], angles[3]);
   Mottdifcrosection[4] = diferential_cross_section_Mott (energies1[4], energies3[4], angles[4]);  
+  */
+  /* Test 1 Cesar
+  Mottdifcrosection[0] = diferential_cross_section_Mott (energies1[0], energies3[0], angles[0]);
+  Mottdifcrosection[1] = diferential_cross_section_Mott (energies1[1], energies3[1], angles[1]);
+  Mottdifcrosection[2] = diferential_cross_section_Mott (energies1[2], energies3[2], angles[2]);
+  */
+  //Test 2 Miguel
+  Mottdifcrosection[0] = diferential_cross_section_Mott (energies1[0], energies3[0], angles[0]);
+  Mottdifcrosection[1] = diferential_cross_section_Mott (energies1[1], energies3[1], angles[1]);
+  Mottdifcrosection[2] = diferential_cross_section_Mott (energies1[2], energies3[2], angles[2]);
+  Mottdifcrosection[3] = diferential_cross_section_Mott (energies1[3], energies3[3], angles[3]);
+  Mottdifcrosection[4] = diferential_cross_section_Mott (energies1[4], energies3[4], angles[4]);
 }
 
 void print (std::vector<int> angles, std::vector<double> energies1, std::vector<double> energies3, std::vector<double> expdifcrosection, std::vector<double> Mottdifcrosection)

@@ -15,4 +15,4 @@ set grid
 set border lw 2
 f(x)=m*x+b
 fit f(x) "data.txt" using 1:2 via m,b
-plot "data.txt" using 1:2 title '$Q^{2}=0.292$ $GeV^2$' lw 2 ps 2 lt 7 lc 7 w p, f(x) lw 3 lc 3 title 'Linear fit $y = mx + b$', f(x) lt 0 lc 3 title '$m = 0.30315 \pm 0.01113$', f(x) lt 0 lc 3 title '$b = 0.30635 \pm 0.03317$'
+plot "data.txt" using 1:2 title '$Q^{2}=0.5$ $GeV^2$' lw 2 ps 2 lt 7 lc 7 w p, f(x) lw 3 lc 3 title 'Linear fit $y = mx + b$', f(x) lt 0 lc 3 title '$m = 0.25663 \pm 0.00957$', f(x) lt 0 lc 3 title '$b = 0.32564 \pm 0.02852$'
